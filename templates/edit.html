@@ -13,6 +13,10 @@
     <body>
         <div class="container">
             <div><h1>Marauder's List Edit</h1></div>
+            <form action="/items" method="POST">
+                <div><input type="text" name="body" value="{{.Name}}"></input></div>
+                <div><input type="submit" value="Save"></div>
+            </form>
         </div>
 
         <!-- Optional JavaScript -->
