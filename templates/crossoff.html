@@ -11,7 +11,17 @@
             <title>Marauder's List</title>
     </head>
     <body>
-        <div>bananas</div>
+        <div class="container">
+            <div><h1>Marauder's List</h1></div>
+            {{range .Items}}
+                <button type="button" class="btn btn-info w-100">{{.Name}}</button>
+            {{end}}
+            <br/>
+            <div><h2>Crossed off</h2></div>
+            {{range .CrossedOffItems}}
+                <button type="button" class="btn btn-light w-100"><s>{{.Name}}</s></button>
+            {{end}}
+        </div>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
