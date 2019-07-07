@@ -6,7 +6,6 @@ import (
 	"regexp"
 )
 
-var templates = template.Must(template.ParseFiles("templates/crossoff.html"))
 var validPath = regexp.MustCompile("^/(crossoff)")
 
 var exampleShoppingList = ShoppingList{Items: []Item{Item{Name: "bananas"}}, CrossedOffItems: []Item{Item{Name: "strawberries"}}}
@@ -23,6 +22,9 @@ func makeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string) {
+	//TODO move to global to cache templates
+	var templates = template.Must(template.ParseFiles("templates/crossoff.html"))
+
 	err := templates.ExecuteTemplate(w, tmpl+".html", exampleShoppingList)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
