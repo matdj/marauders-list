@@ -9,6 +9,8 @@ import (
 var templates = template.Must(template.ParseFiles("templates/crossoff.html"))
 var validPath = regexp.MustCompile("^/(crossoff)")
 
+var exampleShoppingList = ShoppingList{Items: []Item{Item{Name: "bananas"}}, CrossedOffItems: []Item{Item{Name: "strawberries"}}}
+
 func makeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		m := validPath.FindStringSubmatch(r.URL.Path)
@@ -21,7 +23,7 @@ func makeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string) {
-	err := templates.ExecuteTemplate(w, tmpl+".html", Item{Name: "bananas"})
+	err := templates.ExecuteTemplate(w, tmpl+".html", exampleShoppingList)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
