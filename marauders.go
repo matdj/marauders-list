@@ -16,5 +16,6 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/health", healthHandler)
+	http.HandleFunc("/crossoff", makeHandler(crossoffHandler))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
