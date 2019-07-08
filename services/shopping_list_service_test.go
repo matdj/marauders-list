@@ -16,6 +16,33 @@ func TestAddItemToShoppingList(t *testing.T) {
 	}
 }
 
+func TestCopyItems(t *testing.T) {
+	NewShoppingList()
+
+	itemsThen := Items()
+
+	weetbix := domain.Item{Name: "Weetbix"}
+	Add(weetbix)
+
+	if len(itemsThen) != 0 {
+		t.Errorf("Items must be a copy, to prevent external mutation")
+	}
+}
+
+func TestCopyCrossedoffItems(t *testing.T) {
+	NewShoppingList()
+
+	crossedoffIemsThen := CrossedoffItems()
+
+	weetbix := domain.Item{Name: "Weetbix"}
+	Add(weetbix)
+	CrossoffItem(weetbix)
+
+	if len(crossedoffIemsThen) != 0 {
+		t.Errorf("Items must be a copy, to prevent external mutation")
+	}
+}
+
 func TestCrossoffItem(t *testing.T) {
 	NewShoppingList()
 

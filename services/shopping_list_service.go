@@ -4,10 +4,10 @@ import (
     "marauders-list/domain"
 )
 
-var shopping_list = domain.ShoppingList{Items: []domain.Item{}, CrossedOffItems: []domain.Item{}}
+var shopping_list = domain.ShoppingList{Items: []domain.Item{}, CrossedoffItems: []domain.Item{}}
 
 func NewShoppingList() {
-    shopping_list = domain.ShoppingList{Items: []domain.Item{}, CrossedOffItems: []domain.Item{}}
+    shopping_list = domain.ShoppingList{Items: []domain.Item{}, CrossedoffItems: []domain.Item{}}
 }
 
 func Add(item domain.Item) {
@@ -15,7 +15,11 @@ func Add(item domain.Item) {
 }
 
 func Items() []domain.Item {
-	return shopping_list.Items
+	return append([]domain.Item(nil), shopping_list.Items...)
+}
+
+func CrossedoffItems() []domain.Item {
+	return append([]domain.Item(nil), shopping_list.CrossedoffItems...)
 }
 
 func ItemsContains(item domain.Item) bool {
@@ -23,7 +27,7 @@ func ItemsContains(item domain.Item) bool {
 }
 
 func CrossedoffItemsContains(item domain.Item) bool {
-    return sliceContains(shopping_list.CrossedOffItems, item)
+    return sliceContains(shopping_list.CrossedoffItems, item)
 }
 
 func sliceContains(slice []domain.Item, item domain.Item) bool {
@@ -46,13 +50,13 @@ func CrossoffItem(item domain.Item) {
 
     if itemIndex != -1 {
         shopping_list.Items = append(shopping_list.Items[:itemIndex], shopping_list.Items[itemIndex+1:]...)
-        shopping_list.CrossedOffItems = append(shopping_list.CrossedOffItems, item)
+        shopping_list.CrossedoffItems = append(shopping_list.CrossedoffItems, item)
     }
 }
 
 func UncrossoffItem(item domain.Item) {
     var itemIndex = -1
-    for index, i := range shopping_list.CrossedOffItems {
+    for index, i := range shopping_list.CrossedoffItems {
         if i == item {
             itemIndex = index
             break 
@@ -60,7 +64,7 @@ func UncrossoffItem(item domain.Item) {
     }
     
     if itemIndex != -1 {
-        shopping_list.CrossedOffItems = append(shopping_list.CrossedOffItems[:itemIndex], shopping_list.CrossedOffItems[itemIndex+1:]...)
+        shopping_list.CrossedoffItems = append(shopping_list.CrossedoffItems[:itemIndex], shopping_list.CrossedoffItems[itemIndex+1:]...)
         shopping_list.Items = append(shopping_list.Items, item)
     }
 }
