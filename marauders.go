@@ -1,9 +1,9 @@
 package main
 
 import (
+	"log"
 	"marauders-list/controller"
 	"marauders-list/htmlutil"
-	"log"
 	"net/http"
 )
 

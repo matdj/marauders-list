@@ -6,3 +6,7 @@ Example go project to learn go
 go test -v ./...
 ```
 
+## Go format recursive
+```bash
+gofmt -s -w .
+```

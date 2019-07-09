@@ -19,7 +19,7 @@ func (service *ShoppingListService) Items() []domain.Item {
 }
 
 func (service *ShoppingListService) CrossedoffItems() []domain.Item {
-    b := make([]domain.Item, len(service.shoppingList.CrossedoffItems))
+	b := make([]domain.Item, len(service.shoppingList.CrossedoffItems))
 	copy(b, service.shoppingList.Items)
 	return b
 }

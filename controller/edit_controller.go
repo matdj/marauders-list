@@ -1,9 +1,9 @@
 package controller
 
 import (
+	"fmt"
 	"marauders-list/domain"
 	"marauders-list/htmlutil"
-	"fmt"
 	"net/http"
 )
 

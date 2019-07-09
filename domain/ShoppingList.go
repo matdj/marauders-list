@@ -1,6 +1,6 @@
 package domain
 
 type ShoppingList struct {
-	Items []Item 
+	Items           []Item
 	CrossedoffItems []Item
-} 
+}

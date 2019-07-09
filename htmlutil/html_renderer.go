@@ -9,7 +9,9 @@ import (
 var supportedPaths = regexp.MustCompile("^/(crossoff|edit)")
 
 func ReloadTemplateFn() func() *template.Template {
-	return func() *template.Template { return template.Must(template.ParseFiles("templates/crossoff.html", "templates/edit.html")) }
+	return func() *template.Template {
+		return template.Must(template.ParseFiles("templates/crossoff.html", "templates/edit.html"))
+	}
 }
 
 func MakeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
