@@ -6,23 +6,22 @@ import (
 )
 
 func TestAddItemToShoppingList(t *testing.T) {
-	NewShoppingList()
-
+	service := new(ShoppingListService)
 	weetbix := domain.Item{Name: "Weetbix"}
-	Add(weetbix)
+	service.Add(weetbix)
 
-	if !ItemsContains(weetbix) {
+	if !service.ItemsContains(weetbix) {
 		t.Errorf("Shopping list must contain 'Weetbix'")
 	}
 }
 
 func TestCopyItems(t *testing.T) {
-	NewShoppingList()
+	service := new(ShoppingListService)
 
-	itemsThen := Items()
+	itemsThen := service.Items()
 
 	weetbix := domain.Item{Name: "Weetbix"}
-	Add(weetbix)
+	service.Add(weetbix)
 
 	if len(itemsThen) != 0 {
 		t.Errorf("Items must be a copy, to prevent external mutation")
@@ -30,50 +29,50 @@ func TestCopyItems(t *testing.T) {
 }
 
 func TestCopyCrossedoffItems(t *testing.T) {
-	NewShoppingList()
+	service := new(ShoppingListService)
 
-	crossedoffIemsThen := CrossedoffItems()
+	crossedoffIemsThen := service.CrossedoffItems()
 
 	weetbix := domain.Item{Name: "Weetbix"}
-	Add(weetbix)
-	CrossoffItem(weetbix)
+	service.Add(weetbix)
+	service.CrossoffItem(weetbix)
 
 	if len(crossedoffIemsThen) != 0 {
-		t.Errorf("Items must be a copy, to prevent external mutation")
+		t.Errorf("CrossedoffItems must be a copy, to prevent external mutation")
 	}
 }
 
 func TestCrossoffItem(t *testing.T) {
-	NewShoppingList()
+	service := new(ShoppingListService)
 
 	bananas := domain.Item{Name: "bananas"}
-	Add(bananas)
+	service.Add(bananas)
 
-	CrossoffItem(bananas)
+	service.CrossoffItem(bananas)
 
-	if ItemsContains(bananas) {
+	if service.ItemsContains(bananas) {
 		t.Errorf("Items must not contain bananas")
 	}
 
-	if !CrossedoffItemsContains(bananas) {
+	if !service.CrossedoffItemsContains(bananas) {
 		t.Errorf("Crossedoff items must contain bananas")
 	}
-} 
+}
 
 func TestUncrossoffItem(t *testing.T) {
-	NewShoppingList()
+	service := new(ShoppingListService)
 
 	pineapples := domain.Item{Name: "pineapples"}
-	Add(pineapples)
+	service.Add(pineapples)
 
-	CrossoffItem(pineapples)
-	UncrossoffItem(pineapples)
+	service.CrossoffItem(pineapples)
+	service.UncrossoffItem(pineapples)
 
-	if CrossedoffItemsContains(pineapples) {
+	if service.CrossedoffItemsContains(pineapples) {
 		t.Errorf("Crossedoff items must NOT contain pineapples")
 	}
 
-	if !ItemsContains(pineapples) {
+	if !service.ItemsContains(pineapples) {
 		t.Errorf("Items must contain pineapples")
 	}
-} 
+}
