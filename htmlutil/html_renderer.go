@@ -6,7 +6,7 @@ import (
 	"regexp"
 )
 
-var supportedPaths = regexp.MustCompile("^/(crossoff|edit)")
+var supportedPaths = regexp.MustCompile("^/(crossoff|edit|add)")
 
 func ReloadTemplateFn() func() *template.Template {
 	return func() *template.Template {

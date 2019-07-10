@@ -8,14 +8,17 @@
             <!-- Bootstrap CSS -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
-            <title>Marauder's List - Edit</title>
+            <title>Marauder's List - Add</title>
     </head>
     <body>
         <div class="container">
-            <div><h1>Marauder's List Edit</h1></div>
+            <div><h1>Marauder's List Add</h1></div>
+            <a href="crossoff">Home</a>
             <form action="/items" method="POST">
-                <div><input type="text" name="body" value="{{.Name}}"></input></div>
-                <div><input type="submit" value="Save"></div>
+                <div class="form-group row">
+                <input type="text" name="body" value="{{.Name}}" class="col-sm-2 col-form-label" placeholder="Cucumber"></input>
+                <input type="submit" value="Add" class="btn-success">
+            </div>
             </form>
         </div>
 

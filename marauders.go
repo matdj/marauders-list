@@ -16,6 +16,7 @@ func main() {
 	http.HandleFunc("/health", controller.HealthHandler)
 	http.HandleFunc("/crossoff", htmlutil.MakeHandler(crossoff.CrossoffHandler))
 	http.HandleFunc("/edit", htmlutil.MakeHandler(edit.EditHandler))
+	http.HandleFunc("/add", htmlutil.MakeHandler(edit.EditHandler))
 	http.HandleFunc("/items", edit.SaveHandler)
 	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }
