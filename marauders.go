@@ -6,7 +6,15 @@ import (
 	"marauders-list/htmlutil"
 	"marauders-list/services"
 	"net/http"
+	"os"
 )
+
+func determineRunMode() string {
+	if os.Getenv("RUN_MODE") == "prod" {
+		return ":8080"
+	}
+	return "localhost:8080"
+}
 
 func main() {
 	service := new(services.ShoppingListService)
@@ -18,5 +26,9 @@ func main() {
 	http.HandleFunc("/edit", htmlutil.MakeHandler(edit.EditHandler))
 	http.HandleFunc("/add", htmlutil.MakeHandler(edit.EditHandler))
 	http.HandleFunc("/items", edit.SaveHandler)
-	log.Fatal(http.ListenAndServe("localhost:8080", nil))
+
+	runMode := determineRunMode()
+
+	log.Println("Starting webserver " + runMode)
+	log.Fatal(http.ListenAndServe(runMode, nil))
 }
