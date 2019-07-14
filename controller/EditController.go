@@ -9,10 +9,11 @@ import (
 
 type EditController struct {
 	Service *services.ShoppingListService
+	HtmlRenderer *htmlutil.HtmlRenderer
 }
 
-func (controller *EditController) EditHandler(w http.ResponseWriter, r *http.Request) {
-	htmlutil.RenderTemplate(w, "edit", domain.Item{Name: "Cucumber"}, htmlutil.ReloadTemplateFn())
+func (e *EditController) EditHandler(w http.ResponseWriter, r *http.Request) {
+	htmlutil.RenderTemplate(w, "edit", domain.Item{Name: "Cucumber"}, e.HtmlRenderer.ReloadTemplateFn())
 }
 
 func (controller *EditController) SaveHandler(w http.ResponseWriter, r *http.Request) {

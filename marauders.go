@@ -16,10 +16,21 @@ func determineRunMode() string {
 	return "localhost:8080"
 }
 
+func envProperties() string {
+	templatesDir := "templates"
+	if os.Getenv("TEMPLATES_DIR") != "" {
+		templatesDir = os.Getenv("TEMPLATES_DIR")
+	}
+	return templatesDir
+}
+
 func main() {
+	templatesDir := envProperties()
+
+	htmlRenderer := htmlutil.HtmlRenderer{TemplatesDir: templatesDir}
 	service := new(services.ShoppingListService)
-	edit := controller.EditController{Service: service}
-	crossoff := controller.CrossoffController{Service: service}
+	edit := controller.EditController{Service: service, HtmlRenderer: &htmlRenderer}
+	crossoff := controller.CrossoffController{Service: service, HtmlRenderer: &htmlRenderer}
 
 	http.HandleFunc("/health", controller.HealthHandler)
 	http.HandleFunc("/crossoff", htmlutil.MakeHandler(crossoff.CrossoffHandler))

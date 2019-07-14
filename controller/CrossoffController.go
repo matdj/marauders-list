@@ -9,6 +9,7 @@ import (
 
 type CrossoffController struct {
 	Service *services.ShoppingListService
+	HtmlRenderer *htmlutil.HtmlRenderer
 }
 
 func (c *CrossoffController) CrossoffHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +19,7 @@ func (c *CrossoffController) CrossoffHandler(w http.ResponseWriter, r *http.Requ
 		Items:           c.Service.Items(),
 		CrossedoffItems: c.Service.CrossedoffItems()}
 
-	htmlutil.RenderTemplate(w, "crossoff", exampleShoppingList, htmlutil.ReloadTemplateFn())
+	htmlutil.RenderTemplate(w, "crossoff", exampleShoppingList, c.HtmlRenderer.ReloadTemplateFn())
 }
 
 func (c *CrossoffController) addWeetbix() {
