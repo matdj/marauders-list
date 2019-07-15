@@ -1,13 +1,12 @@
 # Based off https://medium.com/@chemidy/create-the-smallest-and-secured-golang-docker-image-based-on-scratch-4752223b7324
 FROM golang:alpine AS builder
 
-RUN apk update && apk add --no-cache git
+RUN apk update && apk add --no-cache git make
 WORKDIR $GOPATH/src/marauders-list
 COPY . .
 
-RUN go get -d -v
-
-RUN go build .
+#RUN go get -d -v
+RUN make build
 
 # Container
 FROM alpine
