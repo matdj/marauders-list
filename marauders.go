@@ -16,16 +16,16 @@ func determineRunMode() string {
 	return "localhost:8080"
 }
 
-func envProperties() string {
-	templatesDir := "templates"
-	if os.Getenv("TEMPLATES_DIR") != "" {
-		templatesDir = os.Getenv("TEMPLATES_DIR")
+func tryDefaultEnvVar(envVar string, envVarDefault string) string {
+	val := envVarDefault
+	if os.Getenv(envVar) != "" {
+		val = os.Getenv(envVar)
 	}
-	return templatesDir
+	return val
 }
 
 func main() {
-	templatesDir := envProperties()
+	templatesDir := tryDefaultEnvVar("TEMPLATES_DIR", "templates")
 
 	htmlRenderer := htmlutil.HtmlRenderer{TemplatesDir: templatesDir}
 	service := new(services.ShoppingListService)
