@@ -8,7 +8,7 @@ import (
 )
 
 type CrossoffController struct {
-	Service *services.ShoppingListService
+	Service      *services.ShoppingListService
 	HtmlRenderer *htmlutil.HtmlRenderer
 }
 

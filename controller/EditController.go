@@ -8,7 +8,7 @@ import (
 )
 
 type EditController struct {
-	Service *services.ShoppingListService
+	Service      *services.ShoppingListService
 	HtmlRenderer *htmlutil.HtmlRenderer
 }
 

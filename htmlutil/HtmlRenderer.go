@@ -14,8 +14,8 @@ type HtmlRenderer struct {
 
 func (htmlRenderer *HtmlRenderer) ReloadTemplateFn() func() *template.Template {
 	return func() *template.Template {
-		return template.Must(template.ParseFiles(htmlRenderer.TemplatesDir + "/crossoff.html", 
-			htmlRenderer.TemplatesDir + "/edit.html"))
+		return template.Must(template.ParseFiles(htmlRenderer.TemplatesDir+"/crossoff.html",
+			htmlRenderer.TemplatesDir+"/edit.html"))
 	}
 }
 
