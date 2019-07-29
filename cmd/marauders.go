@@ -31,8 +31,9 @@ func main() {
 	service := new(services.ShoppingListService)
 	edit := controller.EditController{Service: service, HtmlRenderer: &htmlRenderer}
 	crossoff := controller.CrossoffController{Service: service, HtmlRenderer: &htmlRenderer}
+	health := controller.HealthController {}
 
-	http.HandleFunc("/health", controller.HealthHandler)
+	http.HandleFunc("/health", health.HealthHandler)
 	http.HandleFunc("/crossoff", htmlutil.MakeHandler(crossoff.CrossoffHandler))
 	http.HandleFunc("/edit", htmlutil.MakeHandler(edit.EditHandler))
 	http.HandleFunc("/add", htmlutil.MakeHandler(edit.EditHandler))
